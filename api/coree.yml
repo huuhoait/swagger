@@ -1,0 +1,47 @@
+basePath: /
+consumes:
+    - application/json
+definitions:
+    LoginReq:
+        description: login request | 登录参数
+        x-go-package: api/internal/types
+host: localhost:9100
+info:
+    description: 'Description: user-api service'
+    title: user-api
+    version: 0.0.1
+paths:
+    /api/user/:id:
+        get:
+            operationId: getUserInfo
+    /api/user/login:
+        post:
+            description: Log in | 登录
+            operationId: login
+            parameters:
+                - in: body
+                  name: body
+                  schema:
+                    $ref: '#/definitions/LoginReq'
+                    type: object
+            summary: Log in | 登录
+    /api/user/register:
+        post:
+            operationId: register
+    /api/user/search:
+        get:
+            operationId: searchUser
+produces:
+    - application/json
+schemes:
+    - http
+    - https
+security:
+    - Token:
+        - '[]'
+securityDefinitions:
+    Token:
+        in: header
+        name: Authorization
+        type: apiKey
+swagger: "2.0"
